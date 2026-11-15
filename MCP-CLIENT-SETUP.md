@@ -1,20 +1,25 @@
-﻿# Connect an MCP-compatible client
+# Connect an MCP-compatible client
 
-Hermes uses the Model Context Protocol over a local standard-input/standard-output process. The exact settings screen differs by client; use that client's documentation for adding a local stdio MCP server.
+Hermes runs a local MCP server over standard input/output (stdio). It does not require a public endpoint, tunnel client, port forwarding, bearer token, or scheduled task.
 
-## Example configuration
+## ChatGPT Desktop
 
-Replace the executable path with the actual path where you extracted Hermes. JSON backslashes must be escaped.
+The intended ChatGPT Desktop experience is a desktop-only plugin that launches the local companion. This route requires OpenAI approval and allowlisting. The public Windows package or this repository does not itself grant access to that integration.
 
-See mcp-config-example.json in this folder. Some MCP clients use a different configuration filename or schema. Keep the command pointed to the executable and use the client's documented format.
+When the approved plugin is available, users should install it through the supported ChatGPT Desktop experience and follow the plugin's local setup instructions. Do not ask users to create a tunnel or manually register an MCP server for that approved plugin flow.
 
-## Before connecting
+## Other MCP-compatible desktop clients
 
-1. Run HermesUniversalAgentSettings.exe.
-2. Choose an existing workspace directory.
-3. Leave file writes disabled initially.
-4. Save settings.
-5. Restart or refresh the MCP client after changing its server configuration.
+Other clients may support local stdio servers through their own configuration screens. Use the client's official instructions and the actual executable path. See mcp-config-example.json for a generic example; configuration schemas vary by client.
+
+## Local setup
+
+1. Extract the Windows package to a folder you control.
+2. Run HermesUniversalAgentSettings.exe.
+3. Choose an existing workspace directory.
+4. Leave all permissions disabled initially.
+5. Save settings.
+6. Configure only the client integration you intend to use, following that client's documented process.
 
 ## Verify the connection
 
@@ -22,4 +27,4 @@ Ask the client to call agent_status, then workspace_list. Confirm that the repor
 
 ## Permissions
 
-workspace_write is denied unless file writes are enabled in the local settings app and the individual tool request includes confirm=true. Keep this disabled unless you have a clear need for file creation or editing.
+Every sensitive operation requires local permission in Hermes Settings. File writes, screen capture, window focus, mouse clicks, keyboard typing, and keyboard shortcuts also require confirm=true on each individual tool call. Keep permissions disabled unless you have a clear need for them.

@@ -1,60 +1,67 @@
-﻿# Hermes Universal Agent 0.3.0
+# Hermes Universal Agent
 
-**Windows x64 | Proprietary software | Portable release**
+**Windows x64 | Proprietary software | Development rebuild**
 
-Hermes Universal Agent is a local-first MCP companion for Windows. It provides an MCP server and a small settings application for configuring a local workspace and file-write permissions.
+Hermes Universal Agent is a local-first Windows companion that exposes carefully scoped computer capabilities to a compatible AI client through a local Model Context Protocol (MCP) server.
 
-## What this release does
+> **Development status:** The original 0.3.0 release remains unchanged. This branch is a source reconstruction for the next development line. It is not yet a supported end-user release.
 
-- Lists files and folders inside one configured workspace.
-- Reads UTF-8 text files inside that workspace (maximum 512 KB per file).
-- Writes files only when local write permission is enabled and the MCP request explicitly confirms the write.
-- Saves and searches private notes in a local SQLite database.
-- Reports basic operating-system information.
+## Goals
 
-## What it does not do
+- One locally installed companion with a small Settings application.
+- Local stdio MCP transport; no public endpoint, tunnel client, port forwarding, bearer token, or scheduled task.
+- Workspace access confined to a user-selected folder.
+- Local SQLite memory.
+- Optional Windows desktop observation and interaction, with every sensitive permission disabled by default.
+- Reproducible Windows builds and automated tests.
 
-This release does **not** provide screen capture, mouse or keyboard control, arbitrary shell execution, or general control of Windows applications. It is not a standalone AI assistant. An MCP-compatible AI client is required to use the tools.
+## Current source implementation
 
-## Requirements
+- agent_status, system_info
+- workspace_list, workspace_read, workspace_write
+- memory_save, memory_search
+- desktop_windows_list, desktop_window_focus
+- desktop_screen_capture
+- desktop_mouse_click
+- desktop_keyboard_type, desktop_keyboard_hotkey
 
-- Windows 10 or Windows 11, 64-bit.
-- An MCP client that supports launching a local server over stdio.
+The desktop interaction tools are guarded by local settings and per-action confirm=true. Keyboard shortcuts use a built-in allowlist. There is no arbitrary shell or command-execution tool.
 
-## Quick start
+## Security defaults
 
-1. Extract this ZIP to a folder that you control, for example C:\Tools\HermesUniversalAgent.
-2. Run HermesUniversalAgentSettings.exe.
-3. Choose the workspace folder and leave file writes disabled unless you intentionally need them. Save settings.
-4. Configure your MCP-compatible client to launch server\HermesUniversalAgentMCP.exe. See MCP-CLIENT-SETUP.md.
-5. In the AI client, start with read-only workspace operations. Enable writes only when necessary.
+- All permissions, including file writes and desktop control, default to **off**.
+- File writes require local opt-in and confirm=true on each call.
+- Screen capture, window focus, mouse clicks, and keyboard input each require their own local opt-in and per-call confirmation.
+- Workspace paths are resolved and checked against the configured root, including symlink resolution.
+- Text reads and writes are limited to 512,000 bytes.
+- Local settings and memory stay under %LOCALAPPDATA%\HermesUniversalAgent.
+- No telemetry or remote control endpoint is implemented.
 
-The settings and local memory database are stored under %LOCALAPPDATA%\HermesUniversalAgent. Removing the extracted program folder does not automatically remove this local data.
+Screen contents, window titles, and keyboard input can expose private information. Enable only the permissions needed for a task. Do not use this software for covert monitoring or unattended control.
 
-## MCP tools
+## Development setup
 
-- agent_status
-- workspace_list
-- workspace_read
-- workspace_write
-- memory_save
-- memory_search
-- system_info
+Requires Windows 10/11 x64 and Python 3.11 or newer.
 
-## Security model
+    py -3.12 -m venv .venv
+    .\.venv\Scripts\Activate.ps1
+    python -m pip install --upgrade pip
+    python -m pip install -e ".[dev]"
+    python -m pytest
+    python -m ruff check src tests
 
-- Workspace access is confined to the configured workspace root.
-- File writes are disabled by default.
-- A write requires both the local setting to be enabled and confirm=true in the tool call.
-- The MCP executable uses stdio; this release does not require a public server endpoint or tunnel.
-- Review SECURITY.md.
+Run the MCP server with hermes-agent. Run the local Settings app with hermes-agent-settings.
 
-## ChatGPT Desktop
+Both entry points are also available through python -m hermes_universal_agent.server and python -m hermes_universal_agent.settings_app after installation.
 
-The original ChatGPT Desktop local-plugin route is separate and remains subject to OpenAI's approval and allowlisting requirements. This public Windows package does not itself grant access to that route. For other MCP-compatible clients, follow their local stdio server configuration instructions.
+## Packaging
 
-## Licence and support
+Windows binaries will be produced by the release workflow only after the source and integration tests are validated. Development builds must not replace the 0.3.0 public release.
 
-This is proprietary software. Use is governed by LICENSE.txt. No source code is included in this binary release.
+## Integration note
 
-Report security issues privately as described in SECURITY.md.
+The intended ChatGPT Desktop experience is a desktop-only, approved plugin with the bundled local stdio server. Public GitHub binaries do not bypass OpenAI approval or allowlisting. Other MCP-compatible desktop clients may use their own supported local stdio integration.
+
+## Licence
+
+Use and distribution are governed by LICENSE.txt and any applicable third-party licences. This repository's source rebuild is under active development; obtain legal review before public distribution.

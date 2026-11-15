@@ -1,0 +1,53 @@
+name: Windows package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+      - name: Run tests and lint
+        run: |
+          python -m pytest
+          python -m ruff check src tests
+      - name: Build MCP server
+        run: >
+          python -m PyInstaller --noconfirm --clean --onefile --console
+          --name HermesUniversalAgentMCP
+          --hidden-import mcp.server.fastmcp
+          --hidden-import pyautogui --hidden-import pygetwindow
+          --hidden-import pyscreeze --hidden-import pymsgbox
+          --hidden-import mouseinfo --hidden-import pyrect
+          --hidden-import pyperclip --hidden-import pytweening
+          packaging/entry_server.py
+      - name: Build Settings application
+        run: >
+          python -m PyInstaller --noconfirm --clean --onefile --windowed
+          --name HermesUniversalAgentSettings packaging/entry_settings.py
+      - name: Assemble portable package
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force package | Out-Null
+          Copy-Item dist/HermesUniversalAgentMCP.exe package/
+          Copy-Item dist/HermesUniversalAgentSettings.exe package/
+          Copy-Item README.md, LICENSE.txt, SECURITY.md, PRIVACY.md, MCP-CLIENT-SETUP.md, mcp-config-example.json package/
+          Compress-Archive -Path package/* -DestinationPath HermesUniversalAgent-Windows-x64.zip -Force
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HermesUniversalAgent-Windows-x64
+          path: HermesUniversalAgent-Windows-x64.zip
+          if-no-files-found: error
+          retention-days: 14

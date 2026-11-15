@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hermes-universal-agent"
+version = "0.4.0.dev0"
+description = "Local-first Windows desktop companion with permission-gated MCP tools."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE.txt" }
+dependencies = [
+  "mcp>=1.26,<2",
+  "platformdirs>=4.3,<5",
+  "Pillow>=10.4,<13",
+  "pyautogui>=0.9.54,<1",
+  "PyGetWindow>=0.0.9,<1",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1", "pyinstaller>=6.11,<7"]
+
+[project.scripts]
+hermes-agent = "hermes_universal_agent.server:main"
+hermes-agent-settings = "hermes_universal_agent.settings_app:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hermes_universal_agent"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
