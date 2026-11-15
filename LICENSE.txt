@@ -6,11 +6,11 @@ Copyright (c) 2026 Hermes Universal Agent. All rights reserved.
 IMPORTANT: This is a proprietary licence, not an open-source licence.
 
 1. Limited licence
-Subject to these terms, the publisher grants the individual or legal entity that lawfully obtains this release a limited, non-exclusive, non-transferable, revocable licence to install and use the unmodified binary software for the licensee's own personal or internal business purposes.
+Subject to these terms, the publisher grants the individual or legal entity that lawfully obtains this release a limited, non-exclusive, non-transferable, revocable licence to install and use the unmodified binary software for the licensee's own personal or internal business purposes. The licensee may make the copies technically necessary to download, extract, install, and run the software on devices under their control, and may retain one archival backup copy.
 
 2. Restrictions
 Unless the publisher gives prior written permission, you may not:
-(a) copy, publish, sublicense, sell, rent, lease, distribute, or make the software available to third parties;
+(a) publish, sublicense, sell, rent, lease, redistribute, or make the software available to third parties;
 (b) modify, adapt, translate, or create derivative works from the software;
 (c) reverse engineer, decompile, or disassemble the software, except to the extent that applicable law expressly permits this restriction to be waived;
 (d) remove or alter copyright, proprietary, or attribution notices; or
@@ -20,7 +20,7 @@ Unless the publisher gives prior written permission, you may not:
 The software and all associated intellectual property rights remain with the publisher and its licensors. No ownership rights are transferred to you.
 
 4. Third-party components
-This release may include or depend on third-party components governed by their own licences. Those licences continue to apply to the relevant components and are not replaced by this agreement.
+This release may include or depend on third-party components governed by their own licences. Those licences continue to apply to the relevant components and are not replaced by this agreement. If a third-party licence grants rights that conflict with a restriction in this agreement, the third-party licence controls for that component.
 
 5. Updates and support
 The publisher is not obligated to provide updates, maintenance, or support. Any updates made available are subject to the licence terms accompanying them.
@@ -40,4 +40,4 @@ The governing law and dispute forum will be determined by the publisher's applic
 10. Entire agreement
 These terms constitute the entire licence agreement for this release and supersede prior statements about the software licence. If any provision is unenforceable, the remaining provisions remain in effect.
 
-For written permission or licensing enquiries, contact the publisher through the project's official support channel.
+For written permission or licensing enquiries, contact the publisher through the official project repository.
