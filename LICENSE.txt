@@ -1,0 +1,43 @@
+﻿HERMES UNIVERSAL AGENT — PROPRIETARY SOFTWARE LICENCE
+Version 1.0 — 15 November 2026
+
+Copyright (c) 2026 Hermes Universal Agent. All rights reserved.
+
+IMPORTANT: This is a proprietary licence, not an open-source licence.
+
+1. Limited licence
+Subject to these terms, the publisher grants the individual or legal entity that lawfully obtains this release a limited, non-exclusive, non-transferable, revocable licence to install and use the unmodified binary software for the licensee's own personal or internal business purposes.
+
+2. Restrictions
+Unless the publisher gives prior written permission, you may not:
+(a) copy, publish, sublicense, sell, rent, lease, distribute, or make the software available to third parties;
+(b) modify, adapt, translate, or create derivative works from the software;
+(c) reverse engineer, decompile, or disassemble the software, except to the extent that applicable law expressly permits this restriction to be waived;
+(d) remove or alter copyright, proprietary, or attribution notices; or
+(e) use the software to provide a hosted or managed service to third parties.
+
+3. Ownership
+The software and all associated intellectual property rights remain with the publisher and its licensors. No ownership rights are transferred to you.
+
+4. Third-party components
+This release may include or depend on third-party components governed by their own licences. Those licences continue to apply to the relevant components and are not replaced by this agreement.
+
+5. Updates and support
+The publisher is not obligated to provide updates, maintenance, or support. Any updates made available are subject to the licence terms accompanying them.
+
+6. Disclaimer
+To the maximum extent permitted by applicable law, the software is provided "AS IS", without warranties or conditions of any kind, whether express, implied, statutory, or otherwise, including merchantability, fitness for a particular purpose, and non-infringement.
+
+7. Limitation of liability
+To the maximum extent permitted by applicable law, the publisher will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for loss of data, profits, or business arising from use of the software. Nothing in these terms excludes liability that cannot lawfully be excluded.
+
+8. Termination
+This licence terminates automatically if you materially breach these terms. Upon termination, you must stop using and delete all copies of the software in your possession or control.
+
+9. Governing law
+The governing law and dispute forum will be determined by the publisher's applicable written agreement with the licensee or, absent such an agreement, by applicable law.
+
+10. Entire agreement
+These terms constitute the entire licence agreement for this release and supersede prior statements about the software licence. If any provision is unenforceable, the remaining provisions remain in effect.
+
+For written permission or licensing enquiries, contact the publisher through the project's official support channel.
