@@ -5,3 +5,11 @@
 .env
 *.key
 *.pem
+.venv/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+build/
+dist/
+*.spec
+*.egg-info/

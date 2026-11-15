@@ -1,21 +1,15 @@
-﻿## Hermes Universal Agent 0.3.0
+# Hermes Universal Agent 0.4.0 — Development Preview
 
-First Windows x64 portable binary release.
+This is a reconstructed source preview created after the original development checkout was removed. It is not yet a stable release and does not replace the published 0.3.0 binary.
 
-### Included
-- HermesUniversalAgentSettings.exe
-- Local stdio MCP server executable
-- MCP client setup example and documentation
-- Proprietary licence, privacy notice, and security notes
+## New desktop tools
+- List visible windows.
+- Capture a screenshot with a separate local permission.
+- Focus a window by handle.
+- Click a screen coordinate.
+- Type up to 500 characters into the focused control.
 
-### Capabilities
-Workspace file listing and reading, optional confirmed file writes, local note storage/search, and basic system information.
+All desktop and screen permissions are disabled by default. Each action requires an explicit per-call confirmation. No arbitrary shell execution or background monitoring is included.
 
-### Important limitations
-This release does not provide screen capture, mouse/keyboard control, arbitrary shell execution, or general Windows application control. It requires an MCP-compatible AI client and local stdio configuration. The ChatGPT Desktop local-plugin path remains subject to OpenAI approval and allowlisting.
-
-### Installation
-Extract the ZIP, run the settings utility, choose a workspace, and configure your MCP client using MCP-CLIENT-SETUP.md.
-
-### Licence
-Proprietary. See LICENSE.txt.
+## Verification status
+Automated tests and Windows packaging must pass before this preview is promoted or published as a new binary release.

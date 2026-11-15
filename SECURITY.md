@@ -1,17 +1,16 @@
-﻿# Security
+# Security
 
-Hermes Universal Agent 0.3.0 exposes workspace file listing, text reading, optional confirmed file writing, local note storage/search, and basic system information through a local stdio MCP process.
+Hermes Universal Agent is a local-first Windows MCP companion. The MCP server uses stdio and does not expose a listening network service.
 
-It does not expose arbitrary command execution, screen capture, mouse control, keyboard control, or general Windows application control.
+## Permission model
 
-## Safe defaults
+- Workspace access is confined to the configured workspace root, including resolved symlink targets.
+- File writes are disabled by default and require local permission plus per-call `confirm=true`.
+- Desktop interaction is disabled by default and requires local permission plus per-call `confirm=true` for each action.
+- Screen capture is a separate permission, disabled by default, and each capture requires `confirm=true`.
+- Text file operations are limited to 512,000 bytes. A single typing operation is limited to 500 characters.
+- No arbitrary shell execution, unattended automation, or background screen monitoring is provided.
 
-- File writes are disabled by default.
-- A write requires both the local setting and confirm=true.
-- Workspace paths are resolved against the configured root.
-- Text file reads and writes are limited to 512,000 bytes per operation.
-- Local settings and memory are stored in %LOCALAPPDATA%\HermesUniversalAgent.
+## Reporting vulnerabilities
 
-## Reporting a vulnerability
-
-Do not publish exploitable vulnerability details in a public issue. Contact the project publisher through the support channel listed on the official project page and include the affected version, concise reproduction steps, and impact. Do not include passwords, API keys, private files, or personal data.
+Please use GitHub's private vulnerability reporting feature if enabled for this repository. If it is unavailable, do not publish exploitable details in a public issue; contact the publisher through the repository owner profile. Do not include passwords, API keys, private files, or personal data.
