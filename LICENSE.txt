@@ -1,5 +1,5 @@
-﻿HERMES UNIVERSAL AGENT — PROPRIETARY SOFTWARE LICENCE
-Version 1.0 — 15 November 2026
+HERMES UNIVERSAL AGENT — PROPRIETARY SOFTWARE LICENCE
+Version 1.1 — 15 November 2026
 
 Copyright (c) 2026 Hermes Universal Agent. All rights reserved.
 
@@ -41,3 +41,6 @@ The governing law and dispute forum will be determined by the publisher's applic
 These terms constitute the entire licence agreement for this release and supersede prior statements about the software licence. If any provision is unenforceable, the remaining provisions remain in effect.
 
 For written permission or licensing enquiries, contact the publisher through the official project repository.
+
+11. Public source repository
+The publisher may make source code publicly viewable in the project repository. Such visibility is for inspection only and does not make the software open source or grant any licence to use, compile, execute, modify, adapt, create derivative works from, or redistribute the source code. Any such rights require the publisher's prior written permission. The limited use licence in section 1 applies to the unmodified binary release only. Third-party components remain governed by their respective licences.
