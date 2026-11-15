@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hermes-universal-agent"
+version = "0.4.0"
+description = "Local-first Windows MCP companion with permission-gated desktop controls"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "LicenseRef-Proprietary"
+license-files = ["LICENSE.txt"]
+dependencies = ["mcp>=1.9,<2", "Pillow>=10.0,<13"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov>=5.0", "pyinstaller>=6.0"]
+
+[project.scripts]
+hermes-agent = "hermes_universal_agent.server:main"
+hermes-settings = "hermes_universal_agent.settings_app:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

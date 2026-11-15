@@ -1,25 +1,19 @@
-﻿# Connect an MCP-compatible client
+# MCP client setup
 
-Hermes uses the Model Context Protocol over a local standard-input/standard-output process. The exact settings screen differs by client; use that client's documentation for adding a local stdio MCP server.
+Hermes uses the Model Context Protocol over a local stdio process. Configure your MCP-compatible client to launch the packaged `HermesUniversalAgentMCP.exe`, or use `python -m hermes_universal_agent.server` in a development environment.
 
-## Example configuration
+Example command configuration (adapt the schema to the client's documentation):
 
-Replace the executable path with the actual path where you extracted Hermes. JSON backslashes must be escaped.
+```json
+{
+  "mcpServers": {
+    "hermes-universal-agent": {
+      "command": "C:\\Tools\\HermesUniversalAgent\\HermesUniversalAgentMCP.exe"
+    }
+  }
+}
+```
 
-See mcp-config-example.json in this folder. Some MCP clients use a different configuration filename or schema. Keep the command pointed to the executable and use the client's documented format.
+Before connecting, run the settings application and choose the workspace. Keep file writes, desktop interaction, and screen capture disabled until each capability is intentionally needed. Restart the MCP client after changing settings or its server configuration.
 
-## Before connecting
-
-1. Run HermesUniversalAgentSettings.exe.
-2. Choose an existing workspace directory.
-3. Leave file writes disabled initially.
-4. Save settings.
-5. Restart or refresh the MCP client after changing its server configuration.
-
-## Verify the connection
-
-Ask the client to call agent_status, then workspace_list. Confirm that the reported workspace is the folder you selected.
-
-## Permissions
-
-workspace_write is denied unless file writes are enabled in the local settings app and the individual tool request includes confirm=true. Keep this disabled unless you have a clear need for file creation or editing.
+The original ChatGPT Desktop local-plugin route remains separate and subject to OpenAI approval and allowlisting. A public GitHub release does not grant access to that route.

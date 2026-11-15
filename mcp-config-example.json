@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "hermes-universal-agent": {
+      "command": "C:\\Tools\\HermesUniversalAgent\\server\\HermesUniversalAgentMCP.exe"
+    }
+  }
+}

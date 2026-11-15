@@ -1,60 +1,46 @@
-﻿# Hermes Universal Agent 0.3.0
+# Hermes Universal Agent 0.4.0 — Windows Desktop Preview
 
-**Windows x64 | Proprietary software | Portable release**
+**Windows x64 · Proprietary software · Local-first MCP companion**
 
-Hermes Universal Agent is a local-first MCP companion for Windows. It provides an MCP server and a small settings application for configuring a local workspace and file-write permissions.
+Hermes Universal Agent runs locally on Windows and exposes a Model Context Protocol (MCP) server over standard input/output. It is a companion for an MCP-compatible AI client, not a standalone AI assistant.
 
-## What this release does
+## Capabilities
 
-- Lists files and folders inside one configured workspace.
-- Reads UTF-8 text files inside that workspace (maximum 512 KB per file).
-- Writes files only when local write permission is enabled and the MCP request explicitly confirms the write.
-- Saves and searches private notes in a local SQLite database.
-- Reports basic operating-system information.
+- List and read UTF-8 text files inside one configured workspace.
+- Optional file creation and replacement, protected by a local setting and per-call confirmation.
+- Save and search private notes in a local SQLite database.
+- Report basic operating-system information.
+- List visible windows, focus a window, click coordinates, and type text — only when desktop interaction is enabled locally and the individual tool call includes `confirm=true`.
+- Capture a desktop screenshot — only when the separate screen-capture setting is enabled and the individual call includes `confirm=true`.
 
-## What it does not do
+## Important limitations
 
-This release does **not** provide screen capture, mouse or keyboard control, arbitrary shell execution, or general control of Windows applications. It is not a standalone AI assistant. An MCP-compatible AI client is required to use the tools.
+- Windows 10/11 x64 is the supported target.
+- Requires a compatible MCP client that can launch a local stdio process.
+- Desktop actions operate on the currently interactive Windows session. Windows may deny foreground focus requests.
+- This preview does not provide arbitrary shell execution, background monitoring, unattended control, or remote access.
+- A user should never enable screen capture or desktop control on a shared or unattended computer without understanding the privacy implications.
 
-## Requirements
+## Install from source
 
-- Windows 10 or Windows 11, 64-bit.
-- An MCP client that supports launching a local server over stdio.
+1. Install Python 3.11 or newer.
+2. Create and activate a virtual environment.
+3. Run `python -m pip install -e .`.
+4. Launch `hermes-settings` to choose a workspace and permissions.
+5. Configure your MCP client to launch `hermes-agent` (or the packaged MCP executable) over stdio.
 
-## Quick start
+For a developer build, run `scripts/build_windows.ps1` from PowerShell.
 
-1. Extract this ZIP to a folder that you control, for example C:\Tools\HermesUniversalAgent.
-2. Run HermesUniversalAgentSettings.exe.
-3. Choose the workspace folder and leave file writes disabled unless you intentionally need them. Save settings.
-4. Configure your MCP-compatible client to launch server\HermesUniversalAgentMCP.exe. See MCP-CLIENT-SETUP.md.
-5. In the AI client, start with read-only workspace operations. Enable writes only when necessary.
+## Safe defaults
 
-The settings and local memory database are stored under %LOCALAPPDATA%\HermesUniversalAgent. Removing the extracted program folder does not automatically remove this local data.
+All permission switches default to off. File writes require both local permission and `confirm=true`. Desktop interaction requires its own local permission and per-call confirmation. Screen capture has a separate local permission and per-call confirmation. Settings and SQLite memory remain under `%LOCALAPPDATA%\\HermesUniversalAgent`.
 
 ## MCP tools
 
-- agent_status
-- workspace_list
-- workspace_read
-- workspace_write
-- memory_save
-- memory_search
-- system_info
+- `agent_status`, `workspace_list`, `workspace_read`, `workspace_write`
+- `memory_save`, `memory_search`, `system_info`
+- `desktop_windows`, `desktop_screenshot`, `desktop_focus_window`, `desktop_click`, `desktop_type_text`
 
-## Security model
+## Licence
 
-- Workspace access is confined to the configured workspace root.
-- File writes are disabled by default.
-- A write requires both the local setting to be enabled and confirm=true in the tool call.
-- The MCP executable uses stdio; this release does not require a public server endpoint or tunnel.
-- Review SECURITY.md.
-
-## ChatGPT Desktop
-
-The original ChatGPT Desktop local-plugin route is separate and remains subject to OpenAI's approval and allowlisting requirements. This public Windows package does not itself grant access to that route. For other MCP-compatible clients, follow their local stdio server configuration instructions.
-
-## Licence and support
-
-This is proprietary software. Use is governed by LICENSE.txt. No source code is included in this binary release.
-
-Report security issues privately as described in SECURITY.md.
+This is proprietary software. See [LICENSE.txt](LICENSE.txt). Third-party dependencies remain subject to their own licences.

@@ -1,0 +1,33 @@
+name: Windows CI
+on:
+  push:
+    branches: [main, "feature/**"]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test-and-build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install project and development dependencies
+        run: python -m pip install -e ".[dev]"
+      - name: Run unit tests
+        run: python -m pytest -q
+      - name: Smoke-test source MCP server
+        run: python scripts/smoke_mcp.py
+      - name: Build Windows executables
+        run: |
+          python -m PyInstaller --noconfirm --clean --onefile --name HermesUniversalAgentMCP --collect-submodules mcp.server --collect-submodules mcp.shared --collect-data mcp --hidden-import mcp.server.fastmcp.utilities.types scripts/run_server.py
+          python -m PyInstaller --noconfirm --clean --onefile --windowed --name HermesUniversalAgentSettings scripts/run_settings.py
+      - name: Smoke-test packaged MCP executable and default-deny permissions
+        run: python scripts/smoke_packaged.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: HermesUniversalAgent-Windows-x64
+          path: |
+            dist/HermesUniversalAgentMCP.exe
+            dist/HermesUniversalAgentSettings.exe
